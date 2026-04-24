@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/Res">
+        <file>Res/images/logo.png</file>
+        <file>Res/images/authManage.png</file>
+        <file>Res/images/equipManage.png</file>
+        <file>Res/images/log.png</file>
+        <file>Res/images/sysManage.png</file>
+        <file>Res/images/taskarg.png</file>
+        <file>Res/images/taskManage.png</file>
+    </qresource>
+    <qresource prefix="/Qss">
+        <file>style.qss</file>
+    </qresource>
+</RCC>

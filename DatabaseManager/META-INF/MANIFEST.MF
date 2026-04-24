@@ -1,0 +1,6 @@
+Plugin-SymbolicName: com.ctkstudy.databasemanager
+Plugin-Version: 1.0.0
+Plugin-Name: DatabaseManager
+Plugin-Description: SQLite database service plugin
+Plugin-Vendor: ctkStudy
+Plugin-Interface: Ctk.IDatabaseService/1.0

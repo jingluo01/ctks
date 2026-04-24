@@ -1,0 +1,312 @@
+/* style.qss */
+/* === 针对全局控件样式的基础限定 === */
+QWidget {
+    background-color: #f0f0f0;
+    font-family: 'Microsoft YaHei';
+}
+
+/* ================= 侧边栏专属美化 ================= */
+#sidebarWidget {
+    background-color: #0d726b;
+}
+#navList{
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+#logoLabel {
+    background-color: transparent;
+    padding: 30px;
+    qproperty-pixmap: url(:/Res/Res/images/logo.png);
+}
+
+#navList::item {
+    background-color: transparent;
+    border: none;
+    margin: 6px 8px;
+}
+
+#navList::item:selected {
+    background-color: rgba(255, 255, 255, 0.12);
+    border-radius: 6px;
+}
+
+#navItemWidget,
+#navItemIcon,
+#navItemText {
+    background-color: transparent;
+}
+
+#navItemText {
+    color: white;
+    font-size: 16px;
+    border: none;
+}
+#titleLabel,
+#page1Header,
+#headerBtnWidget {
+        background-color: transparent;
+}
+
+/* ================= TabWidget 专属美化 ================= */
+#tabWidget {
+    margin-top: 10px;
+    background-color: transparent;
+}
+
+/* 面板（下方的内容区）去掉默认边框，只留顶部一条浅灰色的线 */
+QTabWidget::pane {
+    border: none;
+    border-top: 1px solid #E4E7ED;
+}
+
+/* 标签栏（装载各个Tab按钮的容器） */
+QTabBar {
+    background-color: transparent;
+}
+
+/* 单个选项卡 */
+QTabBar::tab {
+    background-color: transparent;
+    color: #606266;               
+    font-size: 15px;              
+    padding: 8px 16px;            
+    margin-right: 15px;           
+    min-width: 80px;              /* 强制给出一个最小跨度防止被压榨 */
+    min-height: 25px;             /* 增加最小高度防止文本底部被切 */
+    border-bottom: 3px solid transparent; 
+}
+
+/* 鼠标悬浮选项卡 */
+QTabBar::tab:hover {
+    color: #42b983;               /* 悬浮时字体变浅绿 */
+}
+
+/* 选中的选项卡 */
+QTabBar::tab:selected {
+    color: #42b983;               /* 选中时字体变绿 */
+    border-bottom: 3px solid #42b983; /* 核心：底部的绿色粗线条 */
+    font-weight: bold;            /* 选中时字体加粗 */
+}
+/* ====================================================== */
+
+
+QPushButton {
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
+}
+QPushButton:hover {
+    background-color: #45a049;
+}
+
+/* ================== 顶部右上角用户按钮 ================== */
+#userBtn {
+    background-color: transparent; /* 去除绿色底色 */
+    color: #333333;                /* 文字变黑灰 */
+    border: none;                  /* 去除边框 */
+    font-size: 14px;
+    padding-right: 15px;           /* 给右侧小三角留点空间 */
+}
+#userBtn:hover {
+    color: #409EFF;                /* 鼠标悬浮时文字变蓝 */
+    background-color: transparent; /* 保持透明 */
+}
+
+/* 修改自带下拉菜单小箭头的样式 */
+#userBtn::menu-indicator {
+    image: none; /* 去掉自带的巨丑箭头 */
+    subcontrol-origin: padding;
+    subcontrol-position: right center;
+}
+
+/* ================== 顶部右上角窗口控制按钮 ================== */
+#setBtn, #minBtn, #closeBtn {
+    background-color: transparent;
+    color: #909399;           /* 字体变为很高级的淡灰色 */
+    border: none;
+    font-size: 24px;          /* 将符号字体进一步放大 */
+    font-weight: normal;
+    font-height: 20px;         /* 强制行高和按钮高度一致，垂直居中 */
+    padding: 0px;
+    width: 36px;              /* 为了适配更大的字体，稍微把按钮本身的活动区域也拉大一点 */
+    height: 22px;
+    border-radius: 4px;       /* 悬浮时候有微小的圆角框 */
+}
+
+#setBtn::menu-indicator {
+    image: none; /* 去掉自带的巨丑箭头 */
+    subcontrol-origin: padding;
+    subcontrol-position: right center;
+}
+
+/* 最小化和设置的悬浮状态：淡灰底 */
+#setBtn:hover, #minBtn:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: #333333;           /* 悬浮时变黑 */
+}
+
+/* 关闭按钮的单独悬浮状态：红色警示底，白字 */
+#closeBtn:hover {
+    background-color: #F56C6C;
+    color: white;
+}
+
+/* ================== 新增的控件特殊样式 ================== */
+
+/* 右侧主内容区域 */
+#mainContent {
+    background-color: #F5F7FA;
+}
+
+/* 表单容器背景 */
+#pageWidget {
+    background-color: #FFFFFF;
+    border-radius: 8px;
+}
+
+/* 内部 Tab 页面 */
+#tab1, #tab2, #tab3, #tab4, #tab5 {
+    background-color: transparent;
+}
+
+/* 顶部工具栏背景（关键字查询那一排）*/
+#tab1ToolsWidget {
+    background-color: transparent;
+}
+
+/* 顶部搜索相关的控件 */
+#KewordLabel {
+    font-size: 14px;
+    color: #333333;
+}
+
+#KewordEdit {
+    background-color: #FFFFFF;
+    border: 1px solid #DCDFE6;
+    border-radius: 4px;
+    padding: 2px 8px;
+    height: 30px;
+}
+
+#KewordEdit:focus {
+    border: 1px solid #42b983;
+}
+
+/* 搜索和重置按钮 */
+#searchBtn, #resetBtn, #addBtn, #deleteBtn {
+    border-radius: 4px;
+    padding: 6px 15px;
+    font-size: 13px;
+    font-weight: bold;
+    min-width: 60px;
+}
+
+#searchBtn {
+    background-color: #409EFF;
+    color: white;
+}
+#searchBtn:hover {
+    background-color: #66b1ff;
+}
+
+#resetBtn {
+    background-color: #FFFFFF;
+    color: #606266;
+    border: 1px solid #DCDFE6;
+}
+#resetBtn:hover {
+    color: #409EFF;
+    border-color: #c6e2ff;
+    background-color: #ecf5ff;
+}
+
+#addBtn {
+    background-color: #67C23A;
+    color: white;
+}
+#addBtn:hover {
+    background-color: #85ce61;
+}
+
+#deleteBtn {
+    background-color: #F56C6C;
+    color: white;
+}
+#deleteBtn:hover {
+    background-color: #f78989;
+}
+
+/* === 表格操作列的小按钮 === */
+#tbEditBtn, #tbDelBtn {
+    padding: 0px;
+    font-size: 12px;
+    border-radius: 4px;
+}
+
+#tbEditBtn {
+    background-color: #409EFF;
+    color: white;
+}
+#tbEditBtn:hover {
+    background-color: #66b1ff;
+}
+
+#tbDelBtn {
+    background-color: #F56C6C;
+    color: white;
+}
+#tbDelBtn:hover {
+    background-color: #f78989;
+}
+
+/* === 表格样式美化 === */
+#tableWidget {
+    background-color: #FFFFFF;
+    border: 1px solid #EBEEF5;
+    gridline-color: #EBEEF5;
+    outline: none; /* 去掉聚焦时候的虚线框 */
+}
+
+/* 调整表头的样式 */
+QHeaderView::section {
+    background-color: #FFFFFF;
+    color: #333333;
+    font-weight: bold;
+    font-size: 13px;
+    padding: 8px;
+    border: none;
+    border-bottom: 1px solid #EBEEF5;
+    border-right: 1px solid #EBEEF5;
+}
+
+
+
+/* 鼠标悬浮和焦点的边框颜色 */
+QHeaderView::indicator:hover {
+    border: 1px solid #409EFF;
+}
+
+/* 勾选后的背景和图片（如果你没有对勾图片，也可以先只改变背景色作为选中效果） */
+QHeaderView::indicator:checked {
+    background-color: #409EFF;
+    border: 1px solid #409EFF;
+    /* image: url(:/icons/check.png); 如果有带透明度的对勾可以解除注释 */
+}
+
+#tableWidget::item {
+    border-bottom: 1px solid #EBEEF5; 
+    border-right: 1px solid #EBEEF5; /* 加上竖线会和截图里类似 */
+}
+
+#tableWidget::item:selected {
+    background-color: #F5F7FA;
+    color: #606266;
+}
+
+/* === 修改放入单元格复选框周围的背景色使其变为透明透明 === */
+#checkItemContainer {
+    background-color: transparent;
+}
