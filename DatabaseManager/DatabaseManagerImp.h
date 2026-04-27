@@ -1,6 +1,7 @@
 #pragma once
 #include <QObject>
 #include <QtSql/QSqlDatabase>
+#include<QCoreApplication>
 #include <ctkPluginContext.h>
 #include "IDatabaseService.h"
 
@@ -8,7 +9,7 @@ class DatabaseManagerImp : public QObject, public IDatabaseService
 {
     Q_OBJECT
     Q_INTERFACES(IDatabaseService)
-    Q_PLUGIN_METADATA(IID "Ctk.IDatabaseService/1.0")
+    // Q_PLUGIN_METADATA(IID "Ctk.IDatabaseService/1.0")
 
 public:
     explicit DatabaseManagerImp(ctkPluginContext* context = nullptr);

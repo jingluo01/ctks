@@ -1,5 +1,5 @@
 <RCC>
-    <qresource prefix="/">
+    <qresource prefix="/DatabaseManager">
         <file>META-INF/MANIFEST.MF</file>
     </qresource>
 </RCC>

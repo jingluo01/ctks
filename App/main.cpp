@@ -8,14 +8,13 @@
 #include <ctkPluginContext.h>
 #include <ctkPluginFrameworkLauncher.h>
 
-
 void loadPluginPath(const QString &strPluginPath, QSharedPointer<ctkPluginFramework> framework)
 {
     QDir dir(strPluginPath);
 
     // 设置过滤器：只保留 DLL 文件（不递归子目录）
     dir.setFilter(QDir::Files | QDir::NoDotAndDotDot);
-    dir.setNameFilters(QStringList("*.dll"));
+    dir.setNameFilters(QStringList("*.dylib"));
 
     // 遍历目录中的文件
     QFileInfoList fileList = dir.entryInfoList();
@@ -27,8 +26,10 @@ void loadPluginPath(const QString &strPluginPath, QSharedPointer<ctkPluginFramew
         try
         {
             plugin = framework->getPluginContext()->installPlugin(url);
-            // 获取MANIFEST.MF中的数据
+
             QHash<QString, QString> headers = plugin->getHeaders();
+            // 获取MANIFEST.MF中的数据
+            // QHash<QString, QString> headers = plugin->getHeaders();
             ctkVersion version = ctkVersion::parseVersion(headers.value(ctkPluginConstants::PLUGIN_VERSION));
             QString name = headers.value(ctkPluginConstants::PLUGIN_NAME);
         }
@@ -52,6 +53,13 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
+    QFile file(":/Qss/style.qss"); // 资源文件
+    if (file.open(QFile::ReadOnly))
+    {
+        QString styleSheet = QLatin1String(file.readAll());
+        qApp->setStyleSheet(styleSheet);
+    }
+
     // 启动框架
     QString path = QCoreApplication::applicationDirPath() + "/ctkPlugins";
     ctkPluginFrameworkLauncher::addSearchPath(path, true);
@@ -72,7 +80,7 @@ int main(int argc, char *argv[])
     }
     loadPluginPath(QCoreApplication::applicationDirPath() + "/ctkPlugins", framework);
 
-    MainWindow w;
+    MainWindow w(framework);
     w.show();
 
     return app.exec();

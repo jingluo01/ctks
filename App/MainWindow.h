@@ -11,13 +11,13 @@
 #include <QtWidgets/QToolButton>
 #include <QtWidgets/QMenu>
 #include <QtCore/QDebug>
+#include <ctkPluginFramework.h>
 #include "TaskParamsPage.h"
 #include "DeviceManagePage.h"
 #include "TaskLogPage.h"
 #include "TaskManagePage.h"
 #include "AuthManagePage.h"
 #include "SystemManagePage.h"
-// #include "TaskParamsPage.h"
 
 
 class MainWindow : public QWidget
@@ -25,7 +25,7 @@ class MainWindow : public QWidget
     Q_OBJECT
 
 public:
-    MainWindow(QWidget* parent = nullptr);
+    MainWindow(QSharedPointer<ctkPluginFramework> framework, QWidget* parent = nullptr);
     ~MainWindow();
 
 
@@ -35,6 +35,7 @@ private:
     QWidget* buildRight();          // 右侧内容区
     QWidget* buildRightHeader();    // 右侧内容区的头部（标题 + 操作按钮）
     
+    QSharedPointer<ctkPluginFramework> m_framework;
     QHBoxLayout*        mainLayout;
     QWidget*            leftWidget;
     QVBoxLayout*        leftLayout;

@@ -1,10 +1,10 @@
-﻿
+
 #include "MainWindow.h"
 #include <QMenu>
 #include <QListWidget>
 
-MainWindow::MainWindow(QWidget *parent)
-    : QWidget(parent)
+MainWindow::MainWindow(QSharedPointer<ctkPluginFramework> framework, QWidget *parent)
+    : QWidget(parent), m_framework(framework)
 {
     setupUI();
 }
@@ -18,6 +18,7 @@ void MainWindow::setupUI()
 {
     this->setFixedSize(1320, 700);
     mainLayout = new QHBoxLayout(this);
+    this->setObjectName("mainWidget");
     mainLayout->setContentsMargins(0, 0, 0, 0);
     mainLayout->setSpacing(0);
 
@@ -39,7 +40,7 @@ QWidget *MainWindow::buildLeft()
     leftLayout->setContentsMargins(0, 0, 0, 0);
     leftLayout->setSpacing(0);
     QLabel *logo = new QLabel(widget);
-    logo->setText(QStringLiteral("Logo"));
+    logo->setObjectName("logo");
     logo->setAlignment(Qt::AlignCenter);
     leftLayout->addWidget(logo);
     QListWidget *list = new QListWidget(widget);
@@ -57,17 +58,17 @@ QWidget *MainWindow::buildLeft()
     for (int i = 0; i < items.size(); ++i)
     {
         QListWidgetItem *listItem = new QListWidgetItem(list);
-        listItem->setSizeHint(QSize(0, 62));
+        listItem->setSizeHint(QSize(0, 80));
 
         QWidget *itemWidget = new QWidget();
         QVBoxLayout *itemLayout = new QVBoxLayout(itemWidget);
         itemLayout->setAlignment(Qt::AlignCenter);
-        itemLayout->setContentsMargins(0, 6, 0, 6);
-        itemLayout->setSpacing(4);
+        itemLayout->setContentsMargins(0, 10, 0, 10);
+        itemLayout->setSpacing(8);
 
         QLabel *iconLabel = new QLabel(itemWidget);
         iconLabel->setAlignment(Qt::AlignCenter);
-        iconLabel->setPixmap(QPixmap(iconPaths[i]).scaled(18, 18, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        iconLabel->setPixmap(QPixmap(iconPaths[i]).scaled(32, 32, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 
         QLabel *label = new QLabel(items[i], itemWidget);
         label->setObjectName("navItemText");
@@ -86,13 +87,13 @@ QWidget *MainWindow::buildRight()
 {
     QWidget *widget = new QWidget(this);
     rightLayout = new QVBoxLayout(widget);
-    rightLayout->setContentsMargins(12, 12, 12, 12);
-    rightLayout->setSpacing(8);
+    rightLayout->setContentsMargins(0,0,0,0);
+    rightLayout->setSpacing(0);
 
     QWidget *header = buildRightHeader();
     rightLayout->addWidget(header);
 
-    taskParamsPage = new TaskParamsPage(widget);
+    taskParamsPage = new TaskParamsPage(m_framework, widget);
     taskParamsPage->setObjectName("taskParamsPage");
     DeviceManagePage* deviceManagePage = new DeviceManagePage(widget);
     deviceManagePage->setObjectName("deviceManagePage");    
@@ -147,7 +148,7 @@ QWidget *MainWindow::buildRightHeader()
     btnGroup->setObjectName("headerBtnWidget");
     QHBoxLayout *bLay = new QHBoxLayout(btnGroup);
     bLay->setContentsMargins(0, 0, 0, 0);
-    bLay->setSpacing(10);
+    bLay->setSpacing(20);
 
     QPushButton *setBtn = new QPushButton(QStringLiteral("≡"), btnGroup);
     setBtn->setObjectName("setBtn");

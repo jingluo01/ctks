@@ -7,7 +7,8 @@ DatabaseManagerImp::DatabaseManagerImp(ctkPluginContext* context)
     : m_pluginContext(context)
 {
     m_database = QSqlDatabase::addDatabase("QSQLITE", "MainConnection");
-    m_database.setDatabaseName("system.db");
+    m_database.setDatabaseName(QCoreApplication::applicationDirPath() + "/system.db");
+
 }
 
 DatabaseManagerImp::~DatabaseManagerImp()
@@ -15,15 +16,23 @@ DatabaseManagerImp::~DatabaseManagerImp()
     close();
 }
 
+
 bool DatabaseManagerImp::open()
 {
     if (m_database.isOpen()) return true;
-    if (!m_database.open()) {
+    // Try to open the database, retry once if failed
+    for (int attempt = 0; attempt < 2; ++attempt) {
+        if (m_database.open()) {
+            return true;
+        }
         m_lastError = m_database.lastError().text();
-        qDebug() << "[DB] open failed:" << m_lastError;
-        return false;
+        qDebug() << "[DB] open failed (attempt" << (attempt + 1) << "):" << m_lastError;
+        if (attempt == 0) {
+            // Close and try again
+            m_database.close();
+        }
     }
-    return true;
+    return false;
 }
 
 void DatabaseManagerImp::close()

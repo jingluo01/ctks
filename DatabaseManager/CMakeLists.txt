@@ -6,21 +6,25 @@ set(CMAKE_AUTORCC ON)
 
 find_package(Qt5 REQUIRED COMPONENTS Core Sql)
 
-add_library(DatabaseManager SHARED
-    DatabaseManagerImp.h
-    DatabaseManagerImp.cpp
-    DatabaseManager.qrc
+set(CTK_INSTALL_DIR "${PROJECT_SOURCE_DIR}/../CTK-install")
+
+
+file(GLOB_RECURSE ALL_SOURCES
+    "*.cpp"
+    "*.h"
+    "*.qrc"
 )
+add_library(DatabaseManager SHARED ${ALL_SOURCES})
 
 target_include_directories(DatabaseManager PRIVATE
-    ${PROJECT_SOURCE_DIR}/../3rdpty/include/ctk-0.1
+    ${CTK_INSTALL_DIR}/include/ctk-0.1
 )
 
 target_link_libraries(DatabaseManager PRIVATE
     Qt5::Core
     Qt5::Sql
-    ${PROJECT_SOURCE_DIR}/../3rdpty/lib/ctk-0.1/libCTKCore.a
-    ${PROJECT_SOURCE_DIR}/../3rdpty/lib/ctk-0.1/libCTKPluginFramework.a
+    ${CTK_INSTALL_DIR}/lib/ctk-0.1/libCTKCore.dylib
+    ${CTK_INSTALL_DIR}/lib/ctk-0.1/libCTKPluginFramework.dylib
 )
 
 target_compile_definitions(DatabaseManager PRIVATE QT_PLUGIN)
@@ -28,5 +32,5 @@ target_compile_definitions(DatabaseManager PRIVATE QT_PLUGIN)
 set_target_properties(DatabaseManager PROPERTIES
     PREFIX ""
     OUTPUT_NAME "DatabaseManager"
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/build/ctkPlugins"
+    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/build/App/ctkPlugins"
 )
